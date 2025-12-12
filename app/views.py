@@ -16,9 +16,10 @@ def listar_equipes_por_grupo(request):
 
 
 class JogadorView(View):
-    def get(self, request, *args, **kwargs):
-        jogador = Jogador.objects.all()
-        return render(request, 'jogador.html', {'jogador': jogador})
+    def get(self, request):
+        equipes = Equipe.objects.all().order_by("nomeequipe").prefetch_related("jogador_set")
+        return render(request, "jogador.html", {"equipes": equipes})
+
 
 
 class EstadiosView(View):

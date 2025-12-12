@@ -68,32 +68,39 @@
             <div class="card-body">
                 <form method="POST">
                     {% csrf_token %}
-
-                    <div class="form-row">
-                        <div class="col-md-4">
+            
+                    <!-- Linha dos campos -->
+                    <div class="form-row mb-3">
+            
+                        <div class="col-md-3">
                             {{ form.partida.label_tag }}
                             {{ form.partida }}
                         </div>
-
+            
                         <div class="col-md-4">
                             {{ form.jogador.label_tag }}
                             {{ form.jogador }}
                         </div>
-
-                        <div class="col-md-2">
+            
+                        <div class="col-md-3">
                             {{ form.minuto.label_tag }}
                             {{ form.minuto }}
                         </div>
-
-                        <div class="col-md-2 mt-4">
-                            <button class="btn btn-success btn-block" type="submit">
+            
+                    </div>
+            
+                    <!-- Linha do botão alinhado à direita -->
+                    <div class="form-row">
+                        <div class="col-md-12 text-right">
+                            <button class="btn btn-success" type="submit">
                                 Adicionar
                             </button>
                         </div>
                     </div>
+            
                 </form>
             </div>
-        </div>
+            
 
         <!-- Lista -->
         <div class="card">

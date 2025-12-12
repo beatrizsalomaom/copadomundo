@@ -2,69 +2,147 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Copa do Mundo Tracker</title>
 
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Página Inicial</title>
-    <!-- Incluindo Bootstrap CSS -->
-    <link rel="stylesheet"
-href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+    body {
+        background-color: #F5F5F5;
+    }
+
+    .hero {
+        background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+                    url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2') center/cover;
+        color: #fff;
+        padding: 120px 20px;
+        border-radius: 0 0 20px 20px;
+        text-shadow: 1px 1px 4px #000;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+        font-weight: 700;
+    }
+
+    .hero p {
+        font-size: 1.3rem;
+        margin-top: 10px;
+    }
+
+    .card-icon {
+        font-size: 40px;
+        color: #0B3D2E;
+    }
+
+    .navbar {
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .btn-custom {
+        background: #F2C94C;
+        color: #0B3D2E;
+        font-weight: bold;
+    }
+    .btn-custom:hover {
+        background: #d9b447;
+        color: #0A2F24;
+    }
+</style>
+
 </head>
 <body>
+
+    <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg" style="background: #0B3D2E;">
         <a class="navbar-brand text-warning font-weight-bold" href="/">Copa do Mundo Tracker</a>
-    
+
         <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbarNav" aria-controls="navbarNav"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon" style="filter: invert(90%);"></span>
         </button>
-    
+
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-    
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="/">Home</a>
-                </li>
-    
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="/equipe/">Equipes</a>
-                </li>
-    
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="/jogador/">Jogadores</a>
-                </li>
-    
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="/partida/">Partidas</a>
-                </li>
-    
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="/estadio/">Estádios</a>
-                </li>
-    
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="/gol/">Gols</a>
-                </li>
-    
-                <li class="nav-item">
-                    <a class="nav-link text-warning font-weight-bold" href="/admin/">Administração</a>
-                </li>
-    
+
+                <li class="nav-item"><a class="nav-link text-light" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-light" href="/equipe/">Equipes</a></li>
+                <li class="nav-item"><a class="nav-link text-light" href="/jogador/">Jogadores</a></li>
+                <li class="nav-item"><a class="nav-link text-light" href="/partida/">Partidas</a></li>
+                <li class="nav-item"><a class="nav-link text-light" href="/estadio/">Estádios</a></li>
+                <li class="nav-item"><a class="nav-link text-light" href="/gol/">Gols</a></li>
+                <li class="nav-item"><a class="nav-link text-warning font-weight-bold" href="/admin/">Administração</a></li>
+
             </ul>
         </div>
     </nav>
-<div class="container mt-5">
-<div class="jumbotron text-center">
-<h1 class="display-4">Olá, seja bem-vindo ao Copa do Mundo Tracker</h1>
-</div>
-</div>
-<!-- Incluindo jQuery e Bootstrap JS -->
-<script
-src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 
-<script
-src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-<script
-src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- HERO / BANNER -->
+    <section class="hero text-center">
+        <h1>Bem-vindo ao Copa do Mundo Tracker</h1>
+        <p>Explore seleções, jogadores, partidas, estádios e acompanhe a Copa de 2026!</p>
+        <a href="/equipe/" class="btn btn-custom btn-lg mt-4">Ver Grupos e Seleções</a>
+    </section>
+
+    <!-- CARDS DE ACESSO RÁPIDO -->
+<div class="container mt-5">
+    <div class="row row-cols-1 row-cols-md-2 g-4 text-center">
+
+        <div class="col mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="card-icon mb-3">📅</div>
+                    <h5 class="card-title">Partidas</h5>
+                    <p class="card-text">Confira as datas, horários, locais e resultados dos confrontos da primeira fase.</p>
+                    <a href="/partida/" class="btn btn-custom">Acessar</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="card-icon mb-3">⚽</div>
+                    <h5 class="card-title">Gols</h5>
+                    <p class="card-text">Contribua para atualização das informações e inclua os gols das partidas.</p>
+                    <a href="/gol/" class="btn btn-custom">Acessar</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="card-icon mb-3">⚽</div>
+                    <h5 class="card-title">Jogadores</h5>
+                    <p class="card-text">Veja todos os jogadores organizados por seleção.</p>
+                    <a href="/jogador/" class="btn btn-custom">Acessar</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="card-icon mb-3">🏟️</div>
+                    <h5 class="card-title">Estádios</h5>
+                    <p class="card-text">Confira em quais estádios os jogos serão realizados.</p>
+                    <a href="/estadio/" class="btn btn-custom">Acessar</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
