@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from .models import *
+from .forms import GolForm
 
 class IndexView(View):
     def get(self, request, *args, **kwargs):
@@ -9,9 +10,8 @@ class IndexView(View):
 
 def listar_equipes_por_grupo(request):
     grupos = {}
-    for letra in "ABCDEFGH":  # Copa tem 8 grupos
+    for letra in "ABCDEFGH":
         grupos[letra] = Equipe.objects.filter(grupo=letra).order_by("nomeequipe")
-
     return render(request, "equipe.html", {"grupos": grupos})
 
 
@@ -32,11 +32,26 @@ class PartidasView(View):
         partidas = Partida.objects.select_related(
             "mandante", "visitante", "estadio"
         ).all()
-
         return render(request, 'partida.html', {'partidas': partidas})
 
 
 class GolssView(View):
-    def get(self, request, *args, **kwargs):
-        gol = Gol.objects.all()
-        return render(request, 'gol.html', {'gol': gol})
+    def get(self, request):
+        gols = Gol.objects.all().order_by("partida")
+        form = GolForm()
+        return render(request, "gol.html", {"gols": gols, "form": form})
+
+    def post(self, request):
+        form = GolForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("/gol/")
+        else:
+            gols = Gol.objects.all()
+            return render(request, "gol.html", {"gols": gols, "form": form})
+
+
+def deletar_gol(request, gol_id):
+    gol = get_object_or_404(Gol, id=gol_id)
+    gol.delete()
+    return redirect("/gol/")

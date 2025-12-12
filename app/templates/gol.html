@@ -5,48 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gols</title>
     <link rel="stylesheet"
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-        <a class="navbar-brand" href="/">Copa do Mundo Tracker</a>
-        <button class="navbar-toggler" type="button"
-            data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false"
-            aria-label="Toggle navigation">
 
-            <span class="navbar-toggler-icon"></span>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg" style="background: #0B3D2E;">
+        <a class="navbar-brand text-warning font-weight-bold" href="/">Copa do Mundo Tracker</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarNav" aria-controls="navbarNav"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon" style="filter: invert(90%);"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav ml-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="/">Home</a>
+                    <a class="nav-link text-light" href="/">Home</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="/equipe/">Equipes</a>
+                    <a class="nav-link text-light" href="/equipe/">Equipes</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="/jogador/">Jogadores</a>
+                    <a class="nav-link text-light" href="/jogador/">Jogadores</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="/partida/">Partidas</a>
+                    <a class="nav-link text-light" href="/partida/">Partidas</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="/estadio/">Estádios</a>
+                    <a class="nav-link text-light" href="/estadio/">Estádios</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="/gol/">Gols</a>
+                    <a class="nav-link text-warning font-weight-bold" href="/gol/">Gols</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-dark" href="/admin/">Administração</a>
+                    <a class="nav-link text-warning font-weight-bold" href="/admin/">Administração</a>
                 </li>
 
             </ul>
@@ -54,32 +55,89 @@
     </nav>
 
     <div class="container mt-5">
-        <h2 class="mb-4">Lista de Gols</h2>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Partida</th>
-                    <th scope="col">Jogador</th>
-                    <th scope="col">Minuto</th>
-                    <th scope="col">Tipo de Gol</th>
-                </tr>
-            </thead>
+        <!-- Título -->
+        <h2 class="mb-4 text-warning font-weight-bold">Registro de Gols</h2>
 
-            <tbody>
-                {% for gol in gols %}
-                <tr>
-                    <td>{{ gol.partida }}</td>
-                    <td>{{ gol.jogador }}</td>
-                    <td>{{ gol.minuto }}</td>
-                    <td>{{ gol.tipo_gol }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <!-- Formulário -->
+        <div class="card mb-4">
+            <div class="card-header" style="background: #0B3D2E; color: #F2C94C;">
+                <h5 class="mb-0">Adicionar Gol</h5>
+            </div>
+
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            {{ form.partida.label_tag }}
+                            {{ form.partida }}
+                        </div>
+
+                        <div class="col-md-4">
+                            {{ form.jogador.label_tag }}
+                            {{ form.jogador }}
+                        </div>
+
+                        <div class="col-md-2">
+                            {{ form.minuto.label_tag }}
+                            {{ form.minuto }}
+                        </div>
+
+                        <div class="col-md-2 mt-4">
+                            <button class="btn btn-success btn-block" type="submit">
+                                Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Lista -->
+        <div class="card">
+            <div class="card-header" style="background: #0B3D2E; color: #F2C94C;">
+                <h5 class="mb-0">Lista de Gols</h5>
+            </div>
+
+            <div class="card-body p-0">
+                <table class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th>Partida</th>
+                            <th>Jogador</th>
+                            <th>Minuto</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for gol in gols %}
+                        <tr>
+                            <td>{{ gol.partida }}</td>
+                            <td>{{ gol.jogador }}</td>
+                            <td>{{ gol.minuto }}'</td>
+                            <td>
+                                <a href="{% url 'deletar_gol' gol.id %}"
+                                   class="btn btn-danger btn-sm">
+                                    Excluir
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="text-center text-muted">
+                                Nenhum gol registrado.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
 
-    <!-- Scripts Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
